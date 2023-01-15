@@ -65,9 +65,10 @@ extern uint32_t chip_type;
 extern int wlink_quitreset(void);
 extern unsigned char riscvchip;
 extern uint8_t armchip;
+struct cmsis_dap;
 extern void wlink_armquitreset(struct cmsis_dap *dap);
 extern int wlink_address;
-int gdb_actual_connections;
+//int gdb_actual_connections;
 struct target_desc_format {
 	char *tdesc;
 	uint32_t tdesc_length;
@@ -3166,7 +3167,7 @@ static int gdb_v_packet(struct connection *connection,
 		if(riscvchip){
 			wlink_quitreset();
 		}else if(armchip){
-			wlink_armquitreset(cmsis_dap_handle);
+			wlink_armquitreset((struct cmsis_dap *)cmsis_dap_handle);
 			}
 	} 
 
